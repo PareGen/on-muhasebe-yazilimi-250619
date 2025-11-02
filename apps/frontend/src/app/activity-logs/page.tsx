@@ -1,6 +1,6 @@
 'use client';
 
-export default function HomepagePage() {
+export default function UserActivityLogsPage() {
   const { data: users, isLoading } = useUsers();
 
   if (isLoading) {
@@ -9,8 +9,8 @@ export default function HomepagePage() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Homepage</h1>
-      <p className="text-muted-foreground mb-6">The landing page that introduces the application and its features.</p>
+      <h1 className="text-3xl font-bold mb-6">User Activity Logs</h1>
+      <p className="text-muted-foreground mb-6">View logs of user activities within the application.</p>
       
       <div className="grid gap-4">
         {users?.map((user: any) => (

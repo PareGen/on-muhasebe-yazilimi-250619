@@ -1,6 +1,6 @@
 'use client';
 
-export default function HomepagePage() {
+export default function DashboardPage() {
   const { data: users, isLoading } = useUsers();
 
   if (isLoading) {
@@ -9,8 +9,8 @@ export default function HomepagePage() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Homepage</h1>
-      <p className="text-muted-foreground mb-6">The landing page that introduces the application and its features.</p>
+      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <p className="text-muted-foreground mb-6">Main overview of user financial data, invoices, and expenses.</p>
       
       <div className="grid gap-4">
         {users?.map((user: any) => (
