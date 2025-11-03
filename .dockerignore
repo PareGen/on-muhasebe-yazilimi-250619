@@ -11,8 +11,10 @@ build
 *.log
 .DS_Store
 coverage
-.env*
-!.env.example
+.env
+.env.local
+.env.*.local
+!**/.env.example
 docker-compose*.yml
 Dockerfile*
 
