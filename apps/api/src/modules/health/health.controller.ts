@@ -4,7 +4,6 @@ import {
   HealthCheckService,
   TypeOrmHealthIndicator,
   MemoryHealthIndicator,
-  DiskHealthIndicator,
 } from '@nestjs/terminus';
 
 @Controller('health')
@@ -13,9 +12,18 @@ export class HealthController {
     private health: HealthCheckService,
     private db: TypeOrmHealthIndicator,
     private memory: MemoryHealthIndicator,
-    private disk: DiskHealthIndicator,
   ) {}
 
+  // Simple liveness check - always returns OK if app is running
+  @Get('live')
+  liveness() {
+    return {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+    };
+  }
+
+  // Readiness check - includes database and memory checks
   @Get()
   @HealthCheck()
   check() {
@@ -28,13 +36,6 @@ export class HealthController {
       
       // Memory health check - RSS should not exceed 300MB
       () => this.memory.checkRSS('memory_rss', 300 * 1024 * 1024),
-      
-      // Disk health check - storage should have at least 50% free space
-      () =>
-        this.disk.checkStorage('storage', {
-          path: '/',
-          thresholdPercent: 0.5,
-        }),
     ]);
   }
 }
