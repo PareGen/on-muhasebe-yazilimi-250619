@@ -1,5 +1,7 @@
 'use client';
 
+import { useUsers } from '@/features/users/hooks';
+
 export default function DashboardPage() {
   const { data: users, isLoading } = useUsers();
 

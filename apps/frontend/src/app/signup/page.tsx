@@ -1,5 +1,7 @@
 'use client';
 
+import { useUsers } from '@/features/users/hooks';
+
 export default function SignupPagePage() {
   const { data: users, isLoading } = useUsers();
 
