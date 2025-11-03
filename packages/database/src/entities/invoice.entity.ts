@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import type { Client } from './client.entity';
 
@@ -14,8 +14,7 @@ export class Invoice extends BaseEntity {
   @Index('idx_invoices_status')
   status!: 'pending' | 'paid' | 'cancelled';
 
-
-@Column({ name: 'client_id' })
+  @Column({ name: 'client_id' })
   client_id!: string;
 
   @Index('idx_invoices_client_id')

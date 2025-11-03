@@ -1,36 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, Repository } from 'typeorm';
-import { Payment } from '@saas-template/database';
 import type { CreatePaymentDto, UpdatePaymentDto } from '@saas-template/core';
+import { Payment } from '@saas-template/database';
+import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
 export class PaymentsRepository extends Repository<Payment> {
-  constructor(private dataSource: DataSource) {
+  constructor(dataSource: DataSource) {
     super(Payment, dataSource.createEntityManager());
   }
 
-  async findAll(userId: string): Promise<Payment[]> {
+  async findAll(_userId: string): Promise<Payment[]> {
     return this.find({
-      where: { userId },
       order: { createdAt: 'DESC' },
     });
   }
 
-  async findById(id: string, userId: string): Promise<Payment | null> {
+  async findById(id: string, _userId: string): Promise<Payment | null> {
     return this.findOne({
-      where: { id, userId },
+      where: { id },
     });
   }
 
-  async create(userId: string, dto: CreatePaymentDto): Promise<Payment> {
-    const payment = this.create({
+  async createPayment(_userId: string, dto: CreatePaymentDto): Promise<Payment> {
+    const payment = super.create({
       ...dto,
-      userId,
     });
     return this.save(payment);
   }
 
-  async update(id: string, userId: string, dto: UpdatePaymentDto): Promise<Payment | null> {
+  async updatePayment(id: string, userId: string, dto: UpdatePaymentDto): Promise<Payment | null> {
     const payment = await this.findById(id, userId);
     if (!payment) {
       return null;
@@ -40,7 +38,7 @@ export class PaymentsRepository extends Repository<Payment> {
     return this.save(payment);
   }
 
-  async remove(id: string, userId: string): Promise<boolean> {
+  async removePayment(id: string, userId: string): Promise<boolean> {
     const payment = await this.findById(id, userId);
     if (!payment) {
       return false;

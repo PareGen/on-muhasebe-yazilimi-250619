@@ -1,4 +1,9 @@
-import { IsOptional, IsString, MinLength, IsBoolean, IsNumber, IsEnum, IsDate, IsUUID } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateExpenseDto {
   @IsNumber()
@@ -32,7 +37,7 @@ export class UpdateExpenseDto {
 export class ExpenseResponseDto {
   id!: string;
   amount!: number;
-  description?: string;
+  description?: string | undefined;
   currency!: string;
   createdAt!: Date;
   updatedAt!: Date;

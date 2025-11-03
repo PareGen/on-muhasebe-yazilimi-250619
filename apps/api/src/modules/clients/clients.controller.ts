@@ -10,7 +10,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import type { CreateClientDto, ClientResponseDto, UpdateClientDto } from '@saas-template/core';
+import type { ClientResponseDto, CreateClientDto, UpdateClientDto } from '@saas-template/core';
 import type { User } from '@saas-template/database';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';

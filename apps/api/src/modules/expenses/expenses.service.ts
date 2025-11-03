@@ -26,14 +26,14 @@ export class ExpensesService {
 
   async create(userId: string, dto: CreateExpenseDto): Promise<ExpenseResponseDto> {
     return this.uow.execute(async () => {
-      const expense = await this.expensesRepository.create(userId, dto);
+      const expense = await this.expensesRepository.createExpense(userId, dto);
       return this.toResponseDto(expense);
     });
   }
 
   async update(id: string, userId: string, dto: UpdateExpenseDto): Promise<ExpenseResponseDto> {
     return this.uow.execute(async () => {
-      const expense = await this.expensesRepository.update(id, userId, dto);
+      const expense = await this.expensesRepository.updateExpense(id, userId, dto);
       if (!expense) {
         throw new NotFoundException('Expense not found');
       }
@@ -43,7 +43,7 @@ export class ExpensesService {
 
   async remove(id: string, userId: string): Promise<void> {
     return this.uow.execute(async () => {
-      const deleted = await this.expensesRepository.remove(id, userId);
+      const deleted = await this.expensesRepository.removeExpense(id, userId);
       if (!deleted) {
         throw new NotFoundException('Expense not found');
       }
@@ -54,10 +54,10 @@ export class ExpensesService {
     return {
       id: expense.id,
       amount: expense.amount,
-      description: expense.description,
+      description: expense.description ?? undefined,
       currency: expense.currency,
       createdAt: expense.createdAt,
       updatedAt: expense.updatedAt,
-    };
+    } as ExpenseResponseDto;
   }
 }

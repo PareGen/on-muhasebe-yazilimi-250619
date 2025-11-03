@@ -1,15 +1,14 @@
-import { UnitOfWork } from '@/core/database/unit-of-work.service';
+// Projects module disabled - Project entity not implemented yet
+// TODO: Implement Project entity in @saas-template/database before enabling this module
+
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Project } from '@saas-template/database';
 import { ProjectsController } from './projects.controller';
 import { ProjectsRepository } from './projects.repository';
 import { ProjectsService } from './projects.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Project])],
   controllers: [ProjectsController],
-  providers: [ProjectsService, ProjectsRepository, UnitOfWork],
+  providers: [ProjectsService, ProjectsRepository],
   exports: [ProjectsService],
 })
 export class ProjectsModule {}

@@ -1,36 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, Repository } from 'typeorm';
-import { Invoice } from '@saas-template/database';
 import type { CreateInvoiceDto, UpdateInvoiceDto } from '@saas-template/core';
+import { Invoice } from '@saas-template/database';
+import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
 export class InvoicesRepository extends Repository<Invoice> {
-  constructor(private dataSource: DataSource) {
+  constructor(dataSource: DataSource) {
     super(Invoice, dataSource.createEntityManager());
   }
 
-  async findAll(userId: string): Promise<Invoice[]> {
+  async findAll(_userId: string): Promise<Invoice[]> {
     return this.find({
-      where: { userId },
       order: { createdAt: 'DESC' },
     });
   }
 
-  async findById(id: string, userId: string): Promise<Invoice | null> {
+  async findById(id: string, _userId: string): Promise<Invoice | null> {
     return this.findOne({
-      where: { id, userId },
+      where: { id },
     });
   }
 
-  async create(userId: string, dto: CreateInvoiceDto): Promise<Invoice> {
-    const invoice = this.create({
+  async createInvoice(_userId: string, dto: CreateInvoiceDto): Promise<Invoice> {
+    const invoice = super.create({
       ...dto,
-      userId,
     });
     return this.save(invoice);
   }
 
-  async update(id: string, userId: string, dto: UpdateInvoiceDto): Promise<Invoice | null> {
+  async updateInvoice(id: string, userId: string, dto: UpdateInvoiceDto): Promise<Invoice | null> {
     const invoice = await this.findById(id, userId);
     if (!invoice) {
       return null;
@@ -40,7 +38,7 @@ export class InvoicesRepository extends Repository<Invoice> {
     return this.save(invoice);
   }
 
-  async remove(id: string, userId: string): Promise<boolean> {
+  async removeInvoice(id: string, userId: string): Promise<boolean> {
     const invoice = await this.findById(id, userId);
     if (!invoice) {
       return false;

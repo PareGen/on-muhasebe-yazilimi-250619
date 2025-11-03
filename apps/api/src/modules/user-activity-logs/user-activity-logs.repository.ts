@@ -1,36 +1,38 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, Repository } from 'typeorm';
-import { Useractivitylog } from '@saas-template/database';
 import type { CreateUseractivitylogDto, UpdateUseractivitylogDto } from '@saas-template/core';
+import { Useractivitylog } from '@saas-template/database';
+import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
 export class UseractivitylogsRepository extends Repository<Useractivitylog> {
-  constructor(private dataSource: DataSource) {
+  constructor(dataSource: DataSource) {
     super(Useractivitylog, dataSource.createEntityManager());
   }
 
-  async findAll(userId: string): Promise<Useractivitylog[]> {
+  async findAll(_userId: string): Promise<Useractivitylog[]> {
     return this.find({
-      where: { userId },
       order: { createdAt: 'DESC' },
     });
   }
 
-  async findById(id: string, userId: string): Promise<Useractivitylog | null> {
+  async findById(id: string, _userId: string): Promise<Useractivitylog | null> {
     return this.findOne({
-      where: { id, userId },
+      where: { id },
     });
   }
 
-  async create(userId: string, dto: CreateUseractivitylogDto): Promise<Useractivitylog> {
-    const useractivitylog = this.create({
+  async createUseractivitylog(_userId: string, dto: CreateUseractivitylogDto): Promise<Useractivitylog> {
+    const useractivitylog = super.create({
       ...dto,
-      userId,
     });
     return this.save(useractivitylog);
   }
 
-  async update(id: string, userId: string, dto: UpdateUseractivitylogDto): Promise<Useractivitylog | null> {
+  async updateUseractivitylog(
+    id: string,
+    userId: string,
+    dto: UpdateUseractivitylogDto
+  ): Promise<Useractivitylog | null> {
     const useractivitylog = await this.findById(id, userId);
     if (!useractivitylog) {
       return null;
@@ -40,7 +42,7 @@ export class UseractivitylogsRepository extends Repository<Useractivitylog> {
     return this.save(useractivitylog);
   }
 
-  async remove(id: string, userId: string): Promise<boolean> {
+  async removeUseractivitylog(id: string, userId: string): Promise<boolean> {
     const useractivitylog = await this.findById(id, userId);
     if (!useractivitylog) {
       return false;

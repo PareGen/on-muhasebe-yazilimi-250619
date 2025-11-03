@@ -1,16 +1,13 @@
+import { DatabaseModule } from '@/core/database/database.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Payment } from '@saas-template/database';
-import { DatabaseModule } from '@/core/database/database.module';
 import { PaymentsController } from './payments.controller';
-import { PaymentsService } from './payments.service';
 import { PaymentsRepository } from './payments.repository';
+import { PaymentsService } from './payments.service';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Payment]),
-    DatabaseModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Payment]), DatabaseModule],
   controllers: [PaymentsController],
   providers: [PaymentsService, PaymentsRepository],
   exports: [PaymentsService],

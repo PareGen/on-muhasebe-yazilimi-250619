@@ -1,5 +1,5 @@
 import { api } from '@/lib/api';
-import type { InvoiceResponseDto, CreateInvoiceDto, UpdateInvoiceDto } from '@saas-template/core';
+import type { CreateInvoiceDto, InvoiceResponseDto, UpdateInvoiceDto } from '@saas-template/core';
 
 export const invoicesService = {
   async getAll(): Promise<InvoiceResponseDto[]> {

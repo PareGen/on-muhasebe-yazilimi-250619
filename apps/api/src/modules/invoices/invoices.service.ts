@@ -26,14 +26,14 @@ export class InvoicesService {
 
   async create(userId: string, dto: CreateInvoiceDto): Promise<InvoiceResponseDto> {
     return this.uow.execute(async () => {
-      const invoice = await this.invoicesRepository.create(userId, dto);
+      const invoice = await this.invoicesRepository.createInvoice(userId, dto);
       return this.toResponseDto(invoice);
     });
   }
 
   async update(id: string, userId: string, dto: UpdateInvoiceDto): Promise<InvoiceResponseDto> {
     return this.uow.execute(async () => {
-      const invoice = await this.invoicesRepository.update(id, userId, dto);
+      const invoice = await this.invoicesRepository.updateInvoice(id, userId, dto);
       if (!invoice) {
         throw new NotFoundException('Invoice not found');
       }
@@ -43,7 +43,7 @@ export class InvoicesService {
 
   async remove(id: string, userId: string): Promise<void> {
     return this.uow.execute(async () => {
-      const deleted = await this.invoicesRepository.remove(id, userId);
+      const deleted = await this.invoicesRepository.removeInvoice(id, userId);
       if (!deleted) {
         throw new NotFoundException('Invoice not found');
       }
@@ -56,7 +56,7 @@ export class InvoicesService {
       client_id: invoice.client_id,
       amount: invoice.amount,
       currency: invoice.currency,
-      status: invoice.status,
+      status: invoice.status as any,
       createdAt: invoice.createdAt,
       updatedAt: invoice.updatedAt,
     };

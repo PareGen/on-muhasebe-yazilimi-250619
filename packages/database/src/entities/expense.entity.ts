@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
 import { BaseEntity } from './base.entity';
 
 @Entity({ name: 'expenses' })
@@ -12,5 +12,4 @@ export class Expense extends BaseEntity {
 
   @Column()
   currency!: string;
-
 }

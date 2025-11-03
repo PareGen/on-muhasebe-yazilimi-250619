@@ -1,5 +1,5 @@
 import { api } from '@/lib/api';
-import type { ExpenseResponseDto, CreateExpenseDto, UpdateExpenseDto } from '@saas-template/core';
+import type { CreateExpenseDto, ExpenseResponseDto, UpdateExpenseDto } from '@saas-template/core';
 
 export const expensesService = {
   async getAll(): Promise<ExpenseResponseDto[]> {

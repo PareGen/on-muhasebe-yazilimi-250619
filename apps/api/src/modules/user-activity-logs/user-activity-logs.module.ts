@@ -1,16 +1,13 @@
+import { DatabaseModule } from '@/core/database/database.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Useractivitylog } from '@saas-template/database';
-import { DatabaseModule } from '@/core/database/database.module';
-import { UseractivitylogsController } from './useractivitylogs.controller';
-import { UseractivitylogsService } from './useractivitylogs.service';
-import { UseractivitylogsRepository } from './useractivitylogs.repository';
+import { UseractivitylogsController } from './user-activity-logs.controller';
+import { UseractivitylogsRepository } from './user-activity-logs.repository';
+import { UseractivitylogsService } from './user-activity-logs.service';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Useractivitylog]),
-    DatabaseModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Useractivitylog]), DatabaseModule],
   controllers: [UseractivitylogsController],
   providers: [UseractivitylogsService, UseractivitylogsRepository],
   exports: [UseractivitylogsService],

@@ -10,11 +10,15 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import type { CreateUseractivitylogDto, UseractivitylogResponseDto, UpdateUseractivitylogDto } from '@saas-template/core';
+import type {
+  CreateUseractivitylogDto,
+  UpdateUseractivitylogDto,
+  UseractivitylogResponseDto,
+} from '@saas-template/core';
 import type { User } from '@saas-template/database';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { UseractivitylogsService } from './useractivitylogs.service';
+import { UseractivitylogsService } from './user-activity-logs.service';
 
 @Controller('useractivitylogs')
 @UseGuards(JwtAuthGuard)
@@ -27,7 +31,10 @@ export class UseractivitylogsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string, @CurrentUser() user: User): Promise<UseractivitylogResponseDto> {
+  async findOne(
+    @Param('id') id: string,
+    @CurrentUser() user: User
+  ): Promise<UseractivitylogResponseDto> {
     return this.useractivitylogsService.findOne(id, user.id);
   }
 

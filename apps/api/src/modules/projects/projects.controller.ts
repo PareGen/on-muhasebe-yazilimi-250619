@@ -1,3 +1,7 @@
+// Projects module disabled - Project entity not implemented yet
+// TODO: Implement Project entity in @saas-template/database before enabling this module
+
+/*
 import {
   Body,
   Controller,
@@ -55,3 +59,6 @@ export class ProjectsController {
     return this.projectsService.remove(id, user.id);
   }
 }
+*/
+
+export class ProjectsController {}

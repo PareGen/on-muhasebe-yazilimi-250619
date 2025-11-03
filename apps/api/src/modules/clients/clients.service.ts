@@ -1,6 +1,6 @@
 import { UnitOfWork } from '@/core/database/unit-of-work.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { CreateClientDto, ClientResponseDto, UpdateClientDto } from '@saas-template/core';
+import type { ClientResponseDto, CreateClientDto, UpdateClientDto } from '@saas-template/core';
 import type { Client } from '@saas-template/database';
 import { ClientsRepository } from './clients.repository';
 
@@ -26,14 +26,14 @@ export class ClientsService {
 
   async create(userId: string, dto: CreateClientDto): Promise<ClientResponseDto> {
     return this.uow.execute(async () => {
-      const client = await this.clientsRepository.create(userId, dto);
+      const client = await this.clientsRepository.createClient(userId, dto);
       return this.toResponseDto(client);
     });
   }
 
   async update(id: string, userId: string, dto: UpdateClientDto): Promise<ClientResponseDto> {
     return this.uow.execute(async () => {
-      const client = await this.clientsRepository.update(id, userId, dto);
+      const client = await this.clientsRepository.updateClient(id, userId, dto);
       if (!client) {
         throw new NotFoundException('Client not found');
       }
@@ -43,7 +43,7 @@ export class ClientsService {
 
   async remove(id: string, userId: string): Promise<void> {
     return this.uow.execute(async () => {
-      const deleted = await this.clientsRepository.remove(id, userId);
+      const deleted = await this.clientsRepository.removeClient(id, userId);
       if (!deleted) {
         throw new NotFoundException('Client not found');
       }
@@ -54,10 +54,10 @@ export class ClientsService {
     return {
       id: client.id,
       name: client.name,
-      email: client.email,
-      phone: client.phone,
+      email: client.email ?? undefined,
+      phone: client.phone ?? undefined,
       createdAt: client.createdAt,
       updatedAt: client.updatedAt,
-    };
+    } as ClientResponseDto;
   }
 }

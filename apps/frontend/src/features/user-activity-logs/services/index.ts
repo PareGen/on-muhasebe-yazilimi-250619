@@ -1,5 +1,9 @@
 import { api } from '@/lib/api';
-import type { UseractivitylogResponseDto, CreateUseractivitylogDto, UpdateUseractivitylogDto } from '@saas-template/core';
+import type {
+  CreateUseractivitylogDto,
+  UpdateUseractivitylogDto,
+  UseractivitylogResponseDto,
+} from '@saas-template/core';
 
 export const useractivitylogsService = {
   async getAll(): Promise<UseractivitylogResponseDto[]> {

@@ -5,7 +5,6 @@ import { AppController } from './app.controller';
 import { configValidationSchema } from './core/config/config.schema';
 import { DatabaseModule } from './core/database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { ProjectsModule } from './modules/projects/projects.module';
 import { UsersModule } from './modules/users/users.module';
 
 @Module({
@@ -24,7 +23,6 @@ import { UsersModule } from './modules/users/users.module';
     DatabaseModule,
     AuthModule,
     UsersModule,
-    ProjectsModule,
   ],
   controllers: [AppController],
 })

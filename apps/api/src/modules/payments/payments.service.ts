@@ -26,14 +26,14 @@ export class PaymentsService {
 
   async create(userId: string, dto: CreatePaymentDto): Promise<PaymentResponseDto> {
     return this.uow.execute(async () => {
-      const payment = await this.paymentsRepository.create(userId, dto);
+      const payment = await this.paymentsRepository.createPayment(userId, dto);
       return this.toResponseDto(payment);
     });
   }
 
   async update(id: string, userId: string, dto: UpdatePaymentDto): Promise<PaymentResponseDto> {
     return this.uow.execute(async () => {
-      const payment = await this.paymentsRepository.update(id, userId, dto);
+      const payment = await this.paymentsRepository.updatePayment(id, userId, dto);
       if (!payment) {
         throw new NotFoundException('Payment not found');
       }
@@ -43,7 +43,7 @@ export class PaymentsService {
 
   async remove(id: string, userId: string): Promise<void> {
     return this.uow.execute(async () => {
-      const deleted = await this.paymentsRepository.remove(id, userId);
+      const deleted = await this.paymentsRepository.removePayment(id, userId);
       if (!deleted) {
         throw new NotFoundException('Payment not found');
       }

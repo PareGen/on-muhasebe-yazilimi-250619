@@ -1,4 +1,8 @@
-import { IsOptional, IsString, MinLength, IsBoolean, IsNumber, IsEnum, IsDate, IsUUID } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateClientDto {
   @IsString()
@@ -34,8 +38,8 @@ export class UpdateClientDto {
 export class ClientResponseDto {
   id!: string;
   name!: string;
-  email?: string;
-  phone?: string;
+  email?: string | undefined;
+  phone?: string | undefined;
   createdAt!: Date;
   updatedAt!: Date;
 }

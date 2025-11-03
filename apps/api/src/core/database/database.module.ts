@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Project, User } from '@saas-template/database';
+import { User } from '@saas-template/database';
 
 @Module({
   imports: [
@@ -13,11 +13,14 @@ import { Project, User } from '@saas-template/database';
         username: configService.get<string>('DB_USERNAME')!,
         password: configService.get<string>('DB_PASSWORD')!,
         database: configService.get<string>('DB_NAME')!,
-        entities: [User, Project],
+        entities: [User],
         synchronize: false,
         logging: configService.get<string>('NODE_ENV') === 'development',
         autoLoadEntities: true,
-        ssl: configService.get<string>('NODE_ENV') === 'production' ? { rejectUnauthorized: false } : false,
+        ssl:
+          configService.get<string>('NODE_ENV') === 'production'
+            ? { rejectUnauthorized: false }
+            : false,
       }),
       inject: [ConfigService],
     }),

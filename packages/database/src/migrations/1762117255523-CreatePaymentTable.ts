@@ -1,4 +1,10 @@
-import { type MigrationInterface, type QueryRunner, Table, TableIndex, TableForeignKey } from 'typeorm';
+import {
+  type MigrationInterface,
+  type QueryRunner,
+  Table,
+  TableForeignKey,
+  TableIndex,
+} from 'typeorm';
 
 export class CreatePaymentTable implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -44,12 +50,11 @@ export class CreatePaymentTable implements MigrationInterface {
             name: 'deleted_at',
             type: 'timestamp with time zone',
             isNullable: true,
-          }
+          },
         ],
       }),
       true
     );
-
 
     await queryRunner.createForeignKey(
       'payments',

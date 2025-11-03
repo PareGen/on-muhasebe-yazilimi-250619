@@ -9,7 +9,8 @@ export function middleware(request: NextRequest) {
     try {
       const decodedCookie = decodeURIComponent(authCookie);
       const authData = JSON.parse(decodedCookie);
-      isAuthenticated = authData?.state?.accessToken !== null && authData?.state?.accessToken !== undefined;
+      isAuthenticated =
+        authData?.state?.accessToken !== null && authData?.state?.accessToken !== undefined;
     } catch {
       // Invalid cookie, treat as not authenticated
       isAuthenticated = false;

@@ -11,7 +11,7 @@ export default function SettingsPagePage() {
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6">Settings Page</h1>
       <p className="text-muted-foreground mb-6">User preferences and application settings.</p>
-      
+
       <div className="grid gap-4">
         {users?.map((user: any) => (
           <div key={user.id} className="border rounded p-4">

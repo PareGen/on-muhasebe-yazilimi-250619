@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import type { User } from './user.entity';
 
@@ -11,8 +11,7 @@ export class Useractivitylog extends BaseEntity {
   @Index('idx_user_activity_logs_timestamp')
   timestamp!: Date;
 
-
-@Column({ name: 'user_id' })
+  @Column({ name: 'user_id' })
   user_id!: string;
 
   @Index('idx_user_activity_logs_user_id')

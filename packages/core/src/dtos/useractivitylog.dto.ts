@@ -1,4 +1,4 @@
-import { IsOptional, IsString, MinLength, IsBoolean, IsNumber, IsEnum, IsDate, IsUUID } from 'class-validator';
+import { IsDate, IsOptional, IsString, IsUUID, MinLength } from 'class-validator';
 
 export class CreateUseractivitylogDto {
   @IsUUID()

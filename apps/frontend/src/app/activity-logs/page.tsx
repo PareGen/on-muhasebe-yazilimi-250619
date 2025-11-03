@@ -10,8 +10,10 @@ export default function UserActivityLogsPage() {
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6">User Activity Logs</h1>
-      <p className="text-muted-foreground mb-6">View logs of user activities within the application.</p>
-      
+      <p className="text-muted-foreground mb-6">
+        View logs of user activities within the application.
+      </p>
+
       <div className="grid gap-4">
         {users?.map((user: any) => (
           <div key={user.id} className="border rounded p-4">

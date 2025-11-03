@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
 import { BaseEntity } from './base.entity';
 
 @Entity({ name: 'clients' })
@@ -12,5 +12,4 @@ export class Client extends BaseEntity {
 
   @Column({ nullable: true })
   phone?: string;
-
 }

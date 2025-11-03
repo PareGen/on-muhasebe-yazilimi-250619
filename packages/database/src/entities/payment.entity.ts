@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import type { Invoice } from './invoice.entity';
 
@@ -11,8 +11,7 @@ export class Payment extends BaseEntity {
   @Index('idx_payments_payment_date')
   payment_date!: Date;
 
-
-@Column({ name: 'invoice_id' })
+  @Column({ name: 'invoice_id' })
   invoice_id!: string;
 
   @Index('idx_payments_invoice_id')
